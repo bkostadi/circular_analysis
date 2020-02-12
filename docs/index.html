@@ -1640,8 +1640,10 @@ summary {
 </div>
 
 
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
 <blockquote>
-<p>The phase data are available in the paper cited above, and for the purpose of this data analysis we recorded it in the file <code>phases.csv</code>, which is available upon request. All R packages must be installed first before they are loaded with <code>library()</code>.</p>
+<p>We use R and RStudio for all data analysis and visualizations. The phase data are available in the paper cited above, and for the purpose of this data analysis we recorded it in the file <code>phases.csv</code>, which is available upon request. All R packages must be installed first before they are loaded with <code>library()</code>.</p>
 </blockquote>
 <pre class="r"><code># load the R packages
 library(readr)
@@ -1653,6 +1655,7 @@ phases &lt;- read_csv(&quot;phases.csv&quot;)</code></pre>
 radphases &lt;- (phases %% 24)*pi/12 # hours in 00:24 and then radians in 0:2pi
 cirradphases &lt;- circular(radphases, units = &quot;radians&quot;, template = &quot;clock24&quot;,
                          modulo=&quot;2pi&quot;, zero=pi/2) # or zero=2*pi</code></pre>
+</div>
 <div id="plot-1-pdfgal4-uasunc5-and-pdfunc5" class="section level1">
 <h1>Plot 1: PdfGal4, uasUNC5 and pdf&gt;UNC5</h1>
 <blockquote>
