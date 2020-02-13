@@ -1,6 +1,8 @@
 # Circular data analysis and visualizations with R
 
-This repository contains the R code used to perform the circular data analysis and visualizations for the paper **Sites of Circadian Clock Neuron Plasticity Mediate Sensory Integration and Entrainment**, doi: https://doi.org/10.1101/794537
+This repository contains the R code used to perform the circular data analysis and visualizations for the paper:
+**Sites of Circadian Clock Neuron Plasticity Mediate Sensory Integration and Entrainment**
+doi: https://doi.org/10.1101/794537
 
 HTML preview of the data analysis and visualizations: https://bkostadi.github.io/circular_analysis/
 
