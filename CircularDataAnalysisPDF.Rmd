@@ -1,0 +1,223 @@
+---
+title: "Circular Data Analysis and Visualizations with R"
+author: ''
+date: "2/12/2020"
+output:
+  pdf_document: default
+subtitle: 'For the paper: *Sites of Circadian Clock Neuron Plasticity Mediate Sensory
+  Integration and Entrainment*, doi: https://doi.org/10.1101/794537'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+We use [R](https://www.r-project.org/) and [RStudio](https://rstudio.com/) for all data analysis and visualizations. The phase data are available in the paper cited above, and for the purpose of this data analysis we recorded it in the file `phases.csv`. The source [R Markdown](https://rmarkdown.rstudio.com/) document (with `Rmd` extension) containing all R code is also available in the [GitHub repository](https://github.com/bkostadi/circular_analysis). 
+
+The key R package that we use for all circular data analysis and visualizations is [**circular**](https://www.rdocumentation.org/packages/circular/versions/0.4-93). All R packages must be installed first before they are loaded with `library()`. 
+
+```{r,warning=FALSE,message=FALSE}
+# load the R packages
+library(readr) # for reading data
+library(circular) # main computing package
+library(scales) # for plot colors support
+# load the phase data, which is available in the cited paper
+phases <- read_csv("phases.csv") 
+```
+
+
+```{r}
+# take phases modulo 24 to remove negative phases and convert to radians
+radphases <- (phases %% 24)*pi/12 # hours in 00:24 and then radians in 0:2pi
+cirradphases <- circular(radphases, units = "radians", template = "clock24",
+                         modulo="2pi", zero=pi/2) # or zero=2*pi
+```
+
+
+```{r,fig.align='center',fig.width=7,fig.height=7,echo=FALSE,eval=FALSE}
+# Test by doing the same conversion using conversion.circular()
+mod24phases <- (phases %% 24) # take hours mod 24 to remove negative hours
+mod24phases <- circular(mod24phases,units ="hours", modulo = "asis",
+                        template = "clock24",zero=24)
+test <- conversion.circular(mod24phases,units="radians",template = "clock24",
+                            modulo="2pi",zero=pi/2) # or zero=2*pi
+# Plotting the data from the two conversions - they should overlap! 
+plot(cirradphases[,1], stack = TRUE, col=alpha("blue",0.8), pch = 16, cex=0.8,
+     sep = 0.08, shrink = 2, main="")
+points(test[,1], stack = TRUE, col=alpha("red",0.8), pch = 16, cex=0.8,
+       sep = 0.08, main="")
+```
+
+
+# Plot 1: PdfGal4, uasUNC5 and pdf>UNC5
+
+In Figure \ref{fig:plot1}, we show the raw circular data plots and rose diagrams of **PdfGal4**, **uasUNC5** and **pdf>UNC5**, based on the angles in radians, obtained from the phases. 
+
+```{r plot1,message=FALSE,warning=FALSE,fig.align='center',fig.width=7,fig.height=7,fig.cap="Circular plots and rose diagrams of PdfGal4, uasUNC5 and pdf>UNC5.",fig.pos="h"}
+# Plot 1
+par(mar=c(rep(1,4))) # set up plot margins
+# plot the circular data as a histogram with stack= TRUE
+plot(cirradphases[,1], stack = TRUE, pch = 21, bg = alpha("gray77",0.8), col="darkgray", 
+     cex=0.8, sep = 0.08, shrink = 2.2,main="PdfGal4, uasUNC5 and pdf>UNC5",
+     cex.main=0.8) # plot PdfGal4 [,1]
+
+# calculate the circular means and point to them by arrows
+circ.mean1<-mean(cirradphases[,1],na.rm = TRUE)
+circ.mean2<-mean(cirradphases[,2],na.rm = TRUE)
+circ.mean3<-mean(cirradphases[,3],na.rm = TRUE)
+
+# adding points for uasUNC5 [,2] and pdf>UNC5 [,3]
+points(cirradphases[,2],stack = TRUE, pch = 21, bg = alpha("gray60",0.8), 
+       col = "darkgray", cex=0.8, sep=0.08) 
+points(cirradphases[,3],stack=TRUE, pch = 21, bg = alpha("firebrick",0.8), 
+       col = "firebrick", cex=0.8, sep=0.08)
+
+# adding arrows to circular means
+arrows.circular(circ.mean1, col = alpha("gray77",0.6), lwd=3) # arrow to circ. mean 
+arrows.circular(circ.mean2, col = alpha("gray60",0.6), lwd=3) # arrow to circ. mean
+arrows.circular(circ.mean3, col = alpha("firebrick",0.6), lwd=3) # arrow to circ. mean
+legend(-0.3,-0.2,legend=c("Pdf-Gal4", "uas-UNC5","Pdf>UNC5"),
+       col=c(alpha("gray77",0.9), alpha("gray60",0.8),alpha("firebrick",0.8)),
+       pch=16,cex=0.8,box.lty=0)
+
+# Rose diagrams
+rose.diag(cirradphases[,1],bins=12,col=alpha("gray77",0.3),
+          cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
+rose.diag(cirradphases[,2],bins=12,col=alpha("gray60",0.3),
+          cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
+rose.diag(cirradphases[,3],bins=12,col=alpha("firebrick",0.3),
+          cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
+```
+
+
+# Plot 2: Pdf-Gal4, uas-DBTL and Pdf>DBTL
+
+In Figure \ref{fig:plot2}, we show the raw circular data plots and rose diagrams of **Pdf-Gal4**, **uas-DBTL** and **Pdf>DBTL**, based on the angles in radians, obtained from the phases.
+
+```{r plot2,message=FALSE,warning=FALSE,fig.align='center',fig.width=7,fig.height=7,fig.cap="Circular plots and rose diagrams of Pdf-Gal4, uas-DBTL and Pdf>DBTL.",fig.pos="h"}
+# Plot 2
+par(mar=c(rep(1,4))) # set plot margins
+# plot the circular data for Pdf-Gal4 [1] as a histogram with stack = TRUE
+plot(cirradphases[,1], stack = TRUE, pch = 21, bg = alpha("gray77",0.8), col="darkgray", 
+     cex=0.8, sep = 0.08, shrink = 2.2, 
+     main="Pdf-Gal4, uas-DBTL and Pdf>DBTL",
+     cex.main=0.8) # plot PdfGal4 [,1]
+
+# calculate the circular means and point to them by arrows
+circ.mean1<-mean(cirradphases[,1],na.rm = TRUE) # Pdf-Gal4 [1]
+circ.mean4<-mean(cirradphases[,4],na.rm = TRUE) # uas-DBTL [4]
+circ.mean6<-mean(cirradphases[,6],na.rm = TRUE) # Pdf>DBTL [6]
+
+# adding points for uas-DBTL [4] and pdf>DBTL [6]
+points(cirradphases[,4],stack = TRUE, pch = 21, bg = alpha("gray45",0.8), 
+       col = "darkgray", cex=0.8, sep=0.08) 
+points(cirradphases[,6],stack=TRUE, pch = 21, bg = alpha("gold3",0.8), col = "gold3",
+       cex=0.8, sep=0.08)
+
+# adding arrows to circular means
+arrows.circular(circ.mean1, col = alpha("gray77",0.6), lwd=3) # arrow to circ. mean 
+arrows.circular(circ.mean4, col = alpha("gray45",0.6), lwd=3) # arrow to circ. mean
+arrows.circular(circ.mean6, col = alpha("gold3",0.6), lwd=3) # arrow to circ. mean
+legend(-0.3,-0.2,legend=c("Pdf-Gal4", "uas-DBTL","Pdf>DBTL"),
+       col=c(alpha("gray77",0.9), alpha("gray45",0.8),alpha("gold3",0.8)),
+       pch=16,cex=0.8,box.lty=0)
+
+# Rose diagrams
+rose.diag(cirradphases[,1],bins=12,col=alpha("gray77",0.3),
+          cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
+rose.diag(cirradphases[,4],bins=12,col=alpha("gray45",0.3),
+          cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
+rose.diag(cirradphases[,6],bins=12,col=alpha("gold3",0.3),
+          cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
+```
+
+
+# Plot 3: Pdf>DBTL, uas-UNC5 and pdf>DBTL,UNC5
+
+In Figure \ref{fig:plot3}, we show the raw circular data plots and rose diagrams of **Pdf>DBTL**, **uas-UNC5** and **pdf>DBTL,UNC5** based on the angles in radians, obtained from the phases.
+
+```{r plot3,message=FALSE,warning=FALSE,fig.align='center',fig.width=7,fig.height=7,fig.cap="Circular plots and rose diagrams of Pdf>DBTL, uas-UNC5 and pdf>DBTL,UNC5.",fig.pos="h"}
+# Plot 3
+par(mar=c(rep(1,4)))
+# plot the circular data for Pdf>DBTL [6] as a histogram with stack = TRUE
+plot(cirradphases[,6], stack = TRUE, pch = 21, bg = alpha("gold3",0.8), col="gold3", 
+     cex=0.8, sep = 0.08, shrink = 2.2, 
+     main="Pdf>DBTL, uas-UNC5 and pdf>DBTL,UNC5",
+     cex.main=0.8)
+
+# calculate the circular means and point to them by arrows
+circ.mean6<-mean(cirradphases[,6],na.rm = TRUE) # Pdf>DBTL [6]
+circ.mean2<-mean(cirradphases[,2],na.rm = TRUE) # uas-UNC5 [2]
+circ.mean7<-mean(cirradphases[,7],na.rm = TRUE) # pdf>DBTL,UNC5 [7]
+
+# adding points for uas-UNC5 [2] and pdf>DBTL,UNC5 [7]
+points(cirradphases[,2],stack = TRUE, pch = 21, bg = alpha("gray60",0.8), 
+       col = "darkgray", cex=0.8, sep=0.08) 
+points(cirradphases[,7],stack=TRUE, pch = 21, bg = alpha("gold4",0.8), col = "gold4",
+       cex=0.8, sep=0.08)
+
+# adding arrows to circular means
+arrows.circular(circ.mean6, col = alpha("gold3",0.6), lwd=3) # arrow to circ. mean 
+arrows.circular(circ.mean2, col = alpha("gray60",0.6), lwd=3) # arrow to circ. mean
+arrows.circular(circ.mean7, col = alpha("gold4",0.6), lwd=3) # arrow to circ. mean
+legend(-0.4,-0.2,legend=c("Pdf>DBTL", "uas-UNC5","pdf>DBTL,UNC5"),
+       col=c(alpha("gold3",0.8), alpha("gray60",0.8),alpha("gold4",0.8)),
+       pch=16,cex=0.8,box.lty=0)
+
+# Rose diagrams
+rose.diag(cirradphases[,6],bins=12,col=alpha("gold3",0.3),
+          cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
+rose.diag(cirradphases[,2],bins=12,col=alpha("gray60",0.3),
+          cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
+rose.diag(cirradphases[,7],bins=12,col=alpha("gold4",0.3),
+          cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
+```
+
+
+# Plot 4: Pdf>DBTL, uas-DBTL and pdf>DBTL,UNC5
+
+In Figure \ref{fig:plot4}, we show the raw circular data plots and rose diagrams of Pdf>DBTL, uas-DBTL and pdf>DBTL,UNC5, based on the angles in radians, obtained from the phases.
+
+```{r plot4,message=FALSE,warning=FALSE,fig.align='center',fig.width=7,fig.height=7,fig.cap="Circular plots and rose diagrams of Pdf>DBTL, uas-DBTL and pdf>DBTL,UNC5.",fig.pos="h"}
+# Plot 4
+par(mar=c(rep(1,4))) # set margins for the plots
+# plot the circular data for Pdf>DBTL [6] as a histogram with stack = TRUE
+plot(cirradphases[,6], stack = TRUE, pch = 21, bg = alpha("gold3",0.8), col="gold3", 
+     cex=0.8, sep = 0.08, shrink = 2.2, 
+     main="Pdf>DBTL, uas-DBTL and pdf>DBTL,UNC5",
+     cex.main=0.8)
+
+# calculate the circular means and point to them by arrows
+circ.mean6<-mean(cirradphases[,6],na.rm = TRUE) # Pdf>DBTL [6]
+circ.mean4<-mean(cirradphases[,4],na.rm = TRUE) # uas-DBTL [4]
+circ.mean7<-mean(cirradphases[,7],na.rm = TRUE) # pdf>DBTL,UNC5 [7]
+
+# adding points for uas-DBTL [4] and pdf>DBTL,UNC5 [7]
+points(cirradphases[,4],stack = TRUE, pch = 21, bg = alpha("gray45",0.8), 
+       col = "darkgray", cex=0.8, sep=0.08) 
+points(cirradphases[,7],stack=TRUE, pch = 21, bg = alpha("gold4",0.8), col = "gold4",
+       cex=0.8, sep=0.08)
+
+# adding arrows to circular means
+arrows.circular(circ.mean6, col = alpha("gold3",0.6), lwd=3) # arrow to circ. mean 
+arrows.circular(circ.mean4, col = alpha("gray45",0.6), lwd=3) # arrow to circ. mean
+arrows.circular(circ.mean7, col = alpha("gold4",0.6), lwd=3) # arrow to circ. mean
+legend(-0.4,-0.2,legend=c("Pdf>DBTL", "uas-DBTL","pdf>DBTL,UNC5"),
+       col=c(alpha("gold3",0.8), alpha("gray45",0.8),alpha("gold4",0.8)),
+       pch=16,cex=0.8,box.lty=0)
+
+# Rose diagrams
+rose.diag(cirradphases[,6],bins=12,col=alpha("gold3",0.3),
+          cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
+rose.diag(cirradphases[,4],bins=12,col=alpha("gray45",0.3),
+          cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
+rose.diag(cirradphases[,7],bins=12,col=alpha("gold4",0.3),
+          cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
+```
+
+
+
+
+
