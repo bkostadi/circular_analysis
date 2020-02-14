@@ -1,11 +1,11 @@
 ---
 title: "Circular Data Analysis and Visualizations with R"
-author: ''
-date: "2/12/2020"
+author: 'Fern&aacute;ndez MP, Pettibone HL, Roell CJ, Davey C, Huynh KV, Lennox S, Kostadinov B and Shafer OT'
+date: "2/14/2020"
 output:
-  pdf_document: default
-subtitle: 'For the paper: *Sites of Circadian Clock Neuron Plasticity Mediate Sensory
-  Integration and Entrainment*, doi: https://doi.org/10.1101/794537'
+  pdf_document:
+    toc: true
+subtitle: 'Developed for the paper: *Sites of Circadian Clock Neuron Plasticity Mediate Sensory Integration and Entrainment*'
 ---
 
 ```{r setup, include=FALSE}
