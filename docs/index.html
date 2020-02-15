@@ -2030,8 +2030,8 @@ points(cirradphases[,3],stack=TRUE, pch = 21, bg = alpha(&quot;firebrick&quot;,0
 arrows.circular(circ.mean1, col = alpha(&quot;gray77&quot;,0.6), lwd=3) # arrow to circ. mean 
 arrows.circular(circ.mean2, col = alpha(&quot;gray60&quot;,0.6), lwd=3) # arrow to circ. mean
 arrows.circular(circ.mean3, col = alpha(&quot;firebrick&quot;,0.6), lwd=3) # arrow to circ. mean
-legend(-0.3,-0.2,legend=c(&quot;Pdf-Gal4&quot;, &quot;uas-UNC5&quot;,&quot;Pdf&gt;UNC5&quot;), col=c(alpha(&quot;gray77&quot;,0.9), 
-                          alpha(&quot;gray60&quot;,0.8),alpha(&quot;firebrick&quot;,0.8)), pch=16,cex=0.8,box.lty=0)
+legend(-0.3,-0.2,legend=c(&quot;Pdf-Gal4&quot;, &quot;uas-UNC5&quot;,&quot;Pdf&gt;UNC5&quot;), 
+       col=c(alpha(&quot;gray77&quot;,0.9),alpha(&quot;gray60&quot;,0.8),alpha(&quot;firebrick&quot;,0.8)), pch=16,cex=0.8,box.lty=0)
 # Rose diagrams
 rose.diag(cirradphases[,1],bins=12,col=alpha(&quot;gray77&quot;,0.3),cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
 rose.diag(cirradphases[,2],bins=12,col=alpha(&quot;gray60&quot;,0.3),cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
@@ -2061,8 +2061,8 @@ points(cirradphases[,6],stack=TRUE, pch = 21, bg = alpha(&quot;gold3&quot;,0.8),
 arrows.circular(circ.mean1, col = alpha(&quot;gray77&quot;,0.6), lwd=3) # arrow to circ. mean 
 arrows.circular(circ.mean4, col = alpha(&quot;gray45&quot;,0.6), lwd=3) # arrow to circ. mean
 arrows.circular(circ.mean6, col = alpha(&quot;gold3&quot;,0.6), lwd=3) # arrow to circ. mean
-legend(-0.3,-0.2,legend=c(&quot;Pdf-Gal4&quot;, &quot;uas-DBTL&quot;,&quot;Pdf&gt;DBTL&quot;), col=c(alpha(&quot;gray77&quot;,0.9), 
-                    alpha(&quot;gray45&quot;,0.8),alpha(&quot;gold3&quot;,0.8)),pch=16,cex=0.8,box.lty=0)
+legend(-0.3,-0.2,legend=c(&quot;Pdf-Gal4&quot;, &quot;uas-DBTL&quot;,&quot;Pdf&gt;DBTL&quot;), 
+       col=c(alpha(&quot;gray77&quot;,0.9),alpha(&quot;gray45&quot;,0.8),alpha(&quot;gold3&quot;,0.8)),pch=16,cex=0.8,box.lty=0)
 # Rose diagrams
 rose.diag(cirradphases[,1],bins=12,col=alpha(&quot;gray77&quot;,0.3),cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
 rose.diag(cirradphases[,4],bins=12,col=alpha(&quot;gray45&quot;,0.3),cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
@@ -2092,7 +2092,8 @@ points(cirradphases[,7],stack=TRUE, pch = 21, bg = alpha(&quot;gold4&quot;,0.8),
 arrows.circular(circ.mean6, col = alpha(&quot;gold3&quot;,0.6), lwd=3) # arrow to circ. mean 
 arrows.circular(circ.mean2, col = alpha(&quot;gray60&quot;,0.6), lwd=3) # arrow to circ. mean
 arrows.circular(circ.mean7, col = alpha(&quot;gold4&quot;,0.6), lwd=3) # arrow to circ. mean
-legend(-0.4,-0.2,legend=c(&quot;Pdf&gt;DBTL&quot;, &quot;uas-UNC5&quot;,&quot;pdf&gt;DBTL,UNC5&quot;),col=c(alpha(&quot;gold3&quot;,0.8),                                                          alpha(&quot;gray60&quot;,0.8),alpha(&quot;gold4&quot;,0.8)),pch=16,cex=0.8,box.lty=0)
+legend(-0.4,-0.2,legend=c(&quot;Pdf&gt;DBTL&quot;, &quot;uas-UNC5&quot;,&quot;pdf&gt;DBTL,UNC5&quot;),
+       col=c(alpha(&quot;gold3&quot;,0.8),alpha(&quot;gray60&quot;,0.8),alpha(&quot;gold4&quot;,0.8)),pch=16,cex=0.8,box.lty=0)
 # Rose diagrams
 rose.diag(cirradphases[,6],bins=12,col=alpha(&quot;gold3&quot;,0.3),cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
 rose.diag(cirradphases[,2],bins=12,col=alpha(&quot;gray60&quot;,0.3),cex=0.8,prop=0.95,add=TRUE,ticks=FALSE)
@@ -2122,7 +2123,8 @@ points(cirradphases[,7],stack=TRUE, pch = 21, bg = alpha(&quot;gold4&quot;,0.8),
 arrows.circular(circ.mean6, col = alpha(&quot;gold3&quot;,0.6), lwd=3) # arrow to circ. mean 
 arrows.circular(circ.mean4, col = alpha(&quot;gray45&quot;,0.6), lwd=3) # arrow to circ. mean
 arrows.circular(circ.mean7, col = alpha(&quot;gold4&quot;,0.6), lwd=3) # arrow to circ. mean
-legend(-0.4,-0.2,legend=c(&quot;Pdf&gt;DBTL&quot;, &quot;uas-DBTL&quot;,&quot;pdf&gt;DBTL,UNC5&quot;),col=c(alpha(&quot;gold3&quot;,0.8),                                                         alpha(&quot;gray45&quot;,0.8),alpha(&quot;gold4&quot;,0.8)),pch=16,cex=0.8,box.lty=0)
+legend(-0.4,-0.2,legend=c(&quot;Pdf&gt;DBTL&quot;, &quot;uas-DBTL&quot;,&quot;pdf&gt;DBTL,UNC5&quot;),
+       col=c(alpha(&quot;gold3&quot;,0.8), alpha(&quot;gray45&quot;,0.8),alpha(&quot;gold4&quot;,0.8)),pch=16,cex=0.8,box.lty=0)
 # Rose diagrams
 rose.diag(cirradphases[,6],bins=12,col=alpha(&quot;gold3&quot;,0.3),cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
 rose.diag(cirradphases[,4],bins=12,col=alpha(&quot;gray45&quot;,0.3),cex=0.8,prop=0.88,add=TRUE,ticks=FALSE)
